@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Builder</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/dist/css/editor.css">
+
+</head>
+<body>
+<div id="email-builder">
+    <!-- Main Sidebar -->
+    <div class="sidebar-main">
+        <div class="sidebar-header">
+            <a class="logo-container" href="/">
+                <img class="logo" src="dist/images/logo.png">
+                <span class="title-container">
+                        <span class="title">EMAIL BUILDER</span>
+                        <span class="subtitle">Create awesome emails</span>
+                    </span>
+            </a>
+        </div>
+        <ul class="nav" data-type="nav">
+            <li class="nav-item active" data-nav="has-child">
+                <span class="item"><i class="icon icon-sliders"></i> Edit</span>
+                <ul class="subnav" data-type="subnav">
+                    <li class="subnav-item" data-target="modules">Modules</li>
+                    <li class="subnav-item" data-target="styles">Styles</li>
+                </ul>
+            </li>
+            <li class="nav-item" data-nav="has-child">
+                <span class="item"><i class="icon icon-send"></i> Send</span>
+                <ul class="subnav" data-type="subnav">
+                    <li class="subnav-item" data-action="send-test-email">Test Email</li>
+                </ul>
+            </li>
+            <li class="nav-item" data-nav="has-child">
+                <span class="item"><i class="icon icon-download"></i> Export</span>
+                <ul class="subnav" data-type="subnav">
+                    <li class="subnav-item" data-action="export-zip">Zip archive</li>
+                    <li class="subnav-item" data-action="export-html">HTML only</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <a class="btn-main" href="#">Main Button</a>
+            <a class="btn-second" href="#">Second Button</a>
+        </div>
+    </div>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Second Sidebar -->
+        <div class="sidebar-second" data-type="sidebar-second">
+            <!-- Modules -->
+            <div class="sidebar-inner" data-sidebar="modules">
+                <div class="inner-header">DRAG AND DROP MODULES</div>
+                <div class="inner-content" data-type="modules-container">
+                </div>
+            </div>
+            <!-- Styles -->
+            <div class="sidebar-inner" data-sidebar="styles">
+                <div class="inner-header">
+                </div>
+                <div class="inner-content">
+                    <div data-type="module-options">
+                    </div><!-- module-options -->
+                </div>
+            </div>
+        </div>
+        <!-- Holder Container -->
+        <div class="holder-container">
+            <!-- Top Sidebar -->
+            <div class="sidebar-top">
+                <span class="item template-preview-mobile"><i class="icon-mobile"></i></span>
+                <span class="item template-preview-tablet"><i class="icon-tablet"></i></span>
+                <span class="item template-clear item-last"><i class="icon-close"></i> Clear</span>
+            </div>
+            <!-- Editor Container -->
+            <div class="editor-container">
+                <!-- Editor Area -->
+                <div class="editor" data-type="editor">
+
+                </div> <!-- /.editor -->
+            </div>
+        </div>
+    </div>
+    <form id="export-form" action="server/_export.php" method="POST">
+        <input type="hidden" name="type" value="html"/>
+        <input id="templateHTML" type="hidden" name="templateHTML" value="" />
+    </form> <!-- / Template Export Form  -->
+</div>
+
+
+<div id="linkeditor" class="modal-container">
+    <div class="input-group">
+        <input class="input-control" type="text" data-link="text" value="" placeholder="Text">
+        <input class="input-control" type="text" data-link="url" value="" placeholder="http://example.com">
+    </div>
+    <div class="modal-controls">
+        <button class="modal-btn-cancel">Cancel</button>
+        <button class="modal-btn-ok">OK</button>
+    </div>
+</div>
+
+<div id="imageeditor" class="modal-container">
+    <div class="modal-container-inner">
+        <div class="input-group">
+            <input class="input-control" type="text" data-image="url" value="" placeholder="URL">
+            <input class="input-control" type="text" data-image="alt" value="" placeholder="Alt">
+            <input class="input-control input-control-small" type="text" data-image="width" value="" placeholder="Width">px X
+            <input class="input-control input-control-small" type="text" data-image="height" value="" placeholder="Height">px
+        </div>
+        <div>
+            <div class="slim" id="modal-image-uploader">
+                <input type="file" >
+                <img src="" alt="" data-image="src">
+            </div>
+        </div>
+    </div>
+    <div class="modal-controls">
+        <button class="modal-btn-cancel">Cancel</button>
+        <button class="modal-btn-ok">OK</button>
+    </div>
+</div>
+
+<div id="bgeditor" class="modal-container">
+    <div class="slim" id="modal-bg-uploader">
+        <input type="file" >
+        <img src="" alt="" data-image="src">
+    </div>
+    <div class="modal-controls">
+        <button class="modal-btn-cancel">Cancel</button>
+        <button class="modal-btn-ok">OK</button>
+    </div>
+</div>
+
+
+<!-- Scripts -->
+
+<!-- App Config -->
+<script type="text/javascript">
+    var config = {
+        host : 'http://localhost',
+        uploads : 'http://localhost/server/uploads',
+        send_script : 'http://localhost/server/_send.php',
+        upload_script : 'http://localhost/server/_upload.php',
+        bg_upload_script : 'http://localhost/server/_upload.php?type=bg',
+    }
+</script>
+<!-- Editor -->
+<script src="dist/js/editor.js"></script>
+<!-- Custom Functions -->
+<script src="dist/js/custom.js"></script>
+<script type="text/javascript">
+    var emailBuilder = new $.EmailBuilder({theme: 'default'});
+    emailBuilder.init();
+</script>
+
+</body>
+</html>
